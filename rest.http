@@ -1,0 +1,4 @@
+@url = http://localhost:8000
+
+### Get Request
+GET {{url}}/user
