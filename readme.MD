@@ -2,7 +2,6 @@
 `
 npm init --y
 `
-   
 
 ### Install all dependencies
 `
@@ -22,4 +21,12 @@ const dotenv = require('dotenv')
 `
 dotenv.config();
 `
+* ### using --env-file=.env instead of dotenv, in package.json
+```
+ "dev": "npx nodemon --env-file=.env server.js",
+```
+
+
+
+
 
