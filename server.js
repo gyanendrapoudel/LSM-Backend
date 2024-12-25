@@ -11,7 +11,16 @@ const PORT = process.env.PORT || 8000
 
 // db config
 import { dbConnection } from './config/dbConfig.js'
-dbConnection();
+    dbConnection()
+      .then(() => {
+        console.log('DB Connected')
+        app.listen(PORT, () => {
+          console.log(`app is listening on ${PORT} `)
+        })
+      })
+      .catch((error) => {
+        console.log('Error occurred', error)
+      })
 
 
 app.use('/user', (req, res) => {
@@ -21,6 +30,3 @@ app.use('/user', (req, res) => {
 })
 
 
-app.listen(PORT, ()=>{
-    console.log(`app is listening on ${PORT} `)
-})
