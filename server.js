@@ -17,7 +17,7 @@ app.use(express.json())
 const PORT = process.env.PORT || 8000
 
 // db config
-import { dbConnection } from './config/dbConfig.js'
+import { dbConnection } from './src/config/dbConfig.js'
     dbConnection()
       .then(() => {
         console.log('DB Connected')
