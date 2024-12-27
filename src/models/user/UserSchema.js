@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'user',
     },
+    status:{
+        type:String,
+        default:"inactive"
+    },
     email: {
       type: String,
       required: true,

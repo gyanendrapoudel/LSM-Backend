@@ -2,7 +2,7 @@ import { createUser } from "../models/user/UserModel.js"
 import { hashPassword } from "../utils/bcrypt.js"
 
 
-export const insertNewUser = async(req,res,error)=>{
+export const insertNewUser = async(req,res,next)=>{
     try {
     const{password} = req.body
     // password encryption
@@ -21,7 +21,12 @@ export const insertNewUser = async(req,res,error)=>{
           
         })
    } catch (error) {
-    console.log(error)
-    next(error)
+   
+    if (error.message.includes('E11000 duplicate key error collection')){
+      error.message="Email already register, please login"
+      error.statusCode=400
+    }
+
+      next(error)
    }
 }
