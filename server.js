@@ -1,6 +1,6 @@
 import express from "express"
 const app = express()
-
+import authRouter from './src/routes/authRoutes.js'
 
 // middleware
 import cors from 'cors'
@@ -30,6 +30,10 @@ import { dbConnection } from './src/config/dbConfig.js'
       .catch((error) => {
         console.log('Error occurred', error)
       })
+
+
+// user api end point
+app.use('/api/v1/auth',authRouter)
 
 
 app.use('/user', (req, res) => {
