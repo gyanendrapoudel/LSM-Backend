@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 8000
 // db config
 import { dbConnection } from './src/config/dbConfig.js'
 import { errorHandler } from "./src/middleware/errorHandler.js"
+import { responseClient } from "./src/middleware/responseClient.js"
     dbConnection()
       .then(() => {
         console.log('DB Connected')
@@ -40,9 +41,9 @@ app.use('/api/v1/auth',authRouter)
 
 
 app.use('/user', (req, res) => {
-  res.json({
-    message: 'hello from router',
-  })
+  const message="hello from router";
+  responseClient({req,res,message});
+  
 })
 
 app.use(errorHandler)

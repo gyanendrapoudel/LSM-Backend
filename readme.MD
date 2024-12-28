@@ -5,7 +5,7 @@ npm init --y
 
 ### Install all dependencies
 `
-yarn add express mongoose jsonwebtoken bcryptjs cors morgan joi nodemailer 
+yarn add express mongoose jsonwebtoken bcryptjs cors morgan joi nodemailer uuid
 `
 ### To read env variables
 
@@ -58,5 +58,4 @@ app.use(cors());
 app.use(morgan("dev"))
 app.use(express.json())
 ```
-
 

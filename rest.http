@@ -11,7 +11,7 @@ Content-Type: application/json
 {
     "fName":"Gyanendra",
     "lName":"Poudel",
-    "email":"g2@gmail.com",
+    "email":"g6@gmail.com",
     "password":"1234"
 
 }
