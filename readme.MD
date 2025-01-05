@@ -25,6 +25,13 @@ dotenv.config();
 ```
  "dev": "npx nodemon --env-file=.env server.js",
 ```
+### list of env variables
+    MONGO_URI =
+    ROOT_URL =
+    SMTP_HOST =
+    SMTP_PORT = 
+
+
 
 ### Database configuration
 * ### In dbConfig.js

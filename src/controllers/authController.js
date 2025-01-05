@@ -44,3 +44,16 @@ export const insertNewUser = async(req,res,next)=>{
       next(error)
    }
 }
+export const activeNewUser = async(req,res,next)=>{
+  try {
+    const {sessionId, t} =req.body
+    console.log("sessionId " , sessionId,"token", t)
+    res.json({
+      status:"success",
+      message:"req received"
+    })
+    
+  } catch (error) {
+    next(error)
+  }
+}
