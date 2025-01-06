@@ -19,3 +19,21 @@ export const userActivationEmailTemplate = ({email,name,url}) => {
           `
   }
 }
+
+// Email template for user activated notification 
+
+export const userActivatedEmailTemplate = ({email,name})=>{
+  return {
+    from: 'declan25@ethereal.email',
+    to:email,
+    subject:'Account is ready to use',
+    text:`Hi ${name}, your account is ready to use. You may login now.`,
+    html:`
+            <h4>Hello ${name}</h4>
+            <br/>
+            <br/>
+            <br/>
+            <p>Your account is ready to use. You may login now.</p>
+          `
+  }
+}

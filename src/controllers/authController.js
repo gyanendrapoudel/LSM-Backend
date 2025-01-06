@@ -3,7 +3,10 @@ import { hashPassword } from "../utils/bcrypt.js"
 import {responseClient} from "../middleware/responseClient.js"
 import { createSession, deleteSession } from '../models/session/SessionModel.js'
 import { v4 as uuidv4 } from 'uuid'
-import { userActivationEmail } from "../services/email/emailService.js"
+import {
+  userActivationEmail,
+  userActivateEmail,
+} from '../services/email/emailService.js'
 
 export const insertNewUser = async(req,res,next)=>{
     try {
@@ -58,8 +61,9 @@ export const activeNewUser = async(req,res,next)=>{
       const result = await updateUserStatus({email:session?.association})
       if(result?.status==="active"){
         // send an email saying your account is activated 
-        const msg = "your account is activated ready to use"
-        responseClient({req,res,msg})
+        const infoId = await userActivateEmail({ email: result.email, name: result.fName })
+        const message = "your account is activated ready to use"
+        responseClient({ req, res, message })
         return
       }
     }
