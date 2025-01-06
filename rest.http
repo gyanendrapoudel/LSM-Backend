@@ -21,6 +21,6 @@ POST {{url}}/api/v1/auth/activate-user
 Content-Type: application/json
 
 {
-    "sessionId":"677a475952bbe79326d76821",
-    "t":"50ce8a86-d99f-4b25-bbef-e8fb7c42132f"
+    "sessionId":"677b348a8690e8a4c5cbc00a",
+    "t":"fb297dd7-98b3-43ce-bc71-3fcdb4a42f64"
 }

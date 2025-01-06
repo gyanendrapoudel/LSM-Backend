@@ -1,7 +1,7 @@
-import { createUser } from "../models/user/UserModel.js"
+import { createUser, updateUserStatus } from '../models/user/UserModel.js'
 import { hashPassword } from "../utils/bcrypt.js"
 import {responseClient} from "../middleware/responseClient.js"
-import { createSession } from "../models/session/SessionModel.js"
+import { createSession, deleteSession } from '../models/session/SessionModel.js'
 import { v4 as uuidv4 } from 'uuid'
 import { userActivationEmail } from "../services/email/emailService.js"
 
@@ -21,7 +21,7 @@ export const insertNewUser = async(req,res,next)=>{
       
       const infoId = await userActivationEmail({url, name:user.fName, email:user.email})
       console.log("infoId, ", infoId)
-      const message = 'user created'
+      const message = 'user created, activation link sent to your email, follow the instructions.'
       responseClient({req,res,message})
 
       //  res.json({
@@ -47,13 +47,30 @@ export const insertNewUser = async(req,res,next)=>{
 export const activeNewUser = async(req,res,next)=>{
   try {
     const {sessionId, t} =req.body
-    console.log("sessionId " , sessionId,"token", t)
-    res.json({
-      status:"success",
-      message:"req received"
-    })
+   
+    // delete session  and update user status to active 
+    
+
+    const session = await deleteSession({_id:sessionId,token:t})
+
+    if(session?._id){
+      // find user using association(which is email in user collection) in session collections
+      const result = await updateUserStatus({email:session?.association})
+      if(result?.status==="active"){
+        // send an email saying your account is activated 
+        const msg = "your account is activated ready to use"
+        responseClient({req,res,msg})
+        return
+      }
+    }
+    
+    throw new Error('Unable to activate your account, Try again')
     
   } catch (error) {
-    next(error)
+    if (error.message.includes("Unable to activate your account, Try again")){
+      error.statusCode = 400
+    }
+    console.log('error details',error)
+      next(error)
   }
 }
