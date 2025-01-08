@@ -1,12 +1,13 @@
 import Joi from 'joi'
+import { responseClient } from '../responseClient.js'
+import { errorHandler } from '../errorHandler.js'
 
 export const validateData = ({req,res,next,obj})=>{
     const { value, error } = obj.validate(req.body)
-    if (error) {
-      res.status(404).json({
-        status: 'error',
-        message: error.message,
-      })
+    if(error){
+        error.statusCode= 404
+        errorHandler(error,req,res,next)
     }
+   
     next()
 }
