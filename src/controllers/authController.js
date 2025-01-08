@@ -20,7 +20,7 @@ export const insertNewUser = async(req,res,next)=>{
         association:user?.email
       }
       const session = await createSession(sessionObj)
-      const url = `${process.env.ROOT_URL}/activate-user?sessionId=${session?._id}&t=${session?.token}`
+      const url = `${process.env.FRONT_END_URL}/activate-user?sessionId=${session?._id}&t=${session?.token}`
       
       const infoId = await userActivationEmail({url, name:user.fName, email:user.email})
       console.log("infoId, ", infoId)
@@ -50,11 +50,12 @@ export const insertNewUser = async(req,res,next)=>{
 export const activeNewUser = async(req,res,next)=>{
   try {
     const {sessionId, t} =req.body
-   
+  
     // delete session  and update user status to active 
     
 
     const session = await deleteSession({_id:sessionId,token:t})
+    
 
     if(session?._id){
       // find user using association(which is email in user collection) in session collections
