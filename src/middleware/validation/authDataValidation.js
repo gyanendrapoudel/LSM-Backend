@@ -1,8 +1,9 @@
 import Joi from 'joi'
 import { EMAIL, FNAME, LNAME, PASSWORD, PHONE } from './joiConst.js'
+import { validateData } from './joiValidation.js'
 
 export const newUserDataValidation = (req,res,next)=>{
-    const schema = Joi.object({
+    const obj = Joi.object({
         fName:FNAME.required(),
         lName:LNAME.required(),
         phone:PHONE,
@@ -10,12 +11,5 @@ export const newUserDataValidation = (req,res,next)=>{
         password:PASSWORD.required()
 
     })
-    const {value, error} = schema.validate(req.body)
-    if(error){
-        res.status(404).json({
-          status: 'error',
-          message: error.message
-        })
-    }
-    next()
+    validateData({req,res,next,obj})
 }
