@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { EMAIL, FNAME, LNAME, PASSWORD, PHONE } from './joiConst.js'
+import { EMAIL, FNAME, LNAME, PASSWORD, PHONE, SESSIONID,TOKEN } from './joiConst.js'
 import { validateData } from './joiValidation.js'
 
 export const newUserDataValidation = (req,res,next)=>{
@@ -12,4 +12,14 @@ export const newUserDataValidation = (req,res,next)=>{
 
     })
     validateData({req,res,next,obj})
+}
+// session token validation
+
+export const activationDataValidation = (req,res,next)=>{
+     const obj = Joi.object({
+       sessionId: SESSIONID.required(),
+       t:TOKEN.required()
+      
+     })
+       validateData({ req, res, next, obj })
 }
