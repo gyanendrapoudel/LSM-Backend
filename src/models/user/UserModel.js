@@ -1,3 +1,4 @@
+import UserSchema from "./UserSchema.js";
 import userSchema from "./UserSchema.js";
 
 export const createUser = (obj)=>{
@@ -10,4 +11,8 @@ export const updateUserStatus = (filter) => {
     { $set: { status: 'active' } },
     { new: true }
   )
+}
+
+export const getUserByEmail = (email)=>{
+  return UserSchema.findOne({email})
 }

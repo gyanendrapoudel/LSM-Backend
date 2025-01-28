@@ -11,7 +11,7 @@ Content-Type: application/json
 {
     "fName":"Gyanendra",
     "lName":"Poudel",
-    "email":"g10@gmail.com",
+    "email":"g11@gmail.com",
     "password":"1234"
 
 }
@@ -23,4 +23,13 @@ Content-Type: application/json
 {
     "sessionId":"677b3e66d10826f8cddb502f",
     "t":"eb1a6a82-7290-4c2f-82bf-166fcb9447e8"
+}
+
+### Post Request to login  user
+POST {{url}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+     "email":"g11@gmail.com",
+     "password":"1234"
 }

@@ -1,9 +1,14 @@
 import express from 'express'
 import { createUser } from '../models/user/UserModel.js'
-import { insertNewUser, activeNewUser } from '../controllers/authController.js'
+import {
+  insertNewUser,
+  activeNewUser,
+  loginUser,
+} from '../controllers/authController.js'
 import {
   newUserDataValidation,
   activationDataValidation,
+  loginDataValidation,
 } from '../middleware/validation/authDataValidation.js'
 
 
@@ -15,6 +20,8 @@ router.post('/register', newUserDataValidation, insertNewUser)
 
 router.post('/activate-user', activationDataValidation, activeNewUser)
 
+// login user
+router.post('/login', loginDataValidation, loginUser)
 
 export default router
 

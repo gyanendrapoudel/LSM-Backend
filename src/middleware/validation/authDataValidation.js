@@ -23,3 +23,11 @@ export const activationDataValidation = (req,res,next)=>{
      })
        validateData({ req, res, next, obj })
 }
+// login data validation
+export const loginDataValidation = (req,res,next)=>{
+  const obj = Joi.object({
+    email:EMAIL.required(),
+    password: PASSWORD.required()
+  })
+  validateData({req,res,next,obj})
+}

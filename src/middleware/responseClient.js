@@ -1,11 +1,12 @@
 
 
-export const responseClient = ({req,res,message, statusCode=200})=>{
+export const responseClient = ({req,res,message, jwts, statusCode=200})=>{
 // success
 req.successResponse = ()=>{
     return res.status(statusCode).json({
-        status:"success",
-        message
+      status: 'success',
+      message,
+      payload: jwts
     })
 }
 // error

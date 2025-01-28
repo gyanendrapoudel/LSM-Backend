@@ -1,5 +1,5 @@
-import { createUser, updateUserStatus } from '../models/user/UserModel.js'
-import { hashPassword } from "../utils/bcrypt.js"
+import { createUser, getUserByEmail, updateUserStatus } from '../models/user/UserModel.js'
+import { comparedPassword, hashPassword } from "../utils/bcrypt.js"
 import {responseClient} from "../middleware/responseClient.js"
 import { createSession, deleteSession } from '../models/session/SessionModel.js'
 import { v4 as uuidv4 } from 'uuid'
@@ -77,5 +77,33 @@ export const activeNewUser = async(req,res,next)=>{
     }
     console.log('error details',error)
       next(error)
+  }
+}
+
+export const loginUser = async(req,res,next)=>{
+  try {
+    const { email, password } = req.body
+    // get user using email
+    const user = await getUserByEmail(email)
+    // user exist
+    console.log(user)
+    let message="invalid login"
+    if (user?._id) {
+      if (user?.status === 'active') {
+        // compared password
+        const isPassed = comparedPassword(password, user?.password)
+        if (isPassed) {
+          // create jwts
+          const jwts = {
+
+          }
+          message="login successful "
+          return responseClient({req,res,message,jwts})
+        }
+      }
+    }
+    responseClient({req,res,message,statusCode:401})
+  } catch (error) {
+    next(error)
   }
 }
