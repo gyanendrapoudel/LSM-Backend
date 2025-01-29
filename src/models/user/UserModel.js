@@ -16,3 +16,9 @@ export const updateUserStatus = (filter) => {
 export const getUserByEmail = (email)=>{
   return UserSchema.findOne({email})
 }
+
+export const updateUser = (filter,update)=>{
+  return userSchema.findOneAndUpdate(
+    filter,update,{new:true}
+  )
+}

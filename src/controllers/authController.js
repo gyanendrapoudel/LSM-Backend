@@ -8,6 +8,7 @@ import {
   userActivateEmail,
 } from '../services/email/emailService.js'
 
+
 export const insertNewUser = async(req,res,next)=>{
     try {
     const{password} = req.body
@@ -94,8 +95,8 @@ export const loginUser = async(req,res,next)=>{
         const isPassed = comparedPassword(password, user?.password)
         if (isPassed) {
           // create jwts
+         
           const jwts = {
-
           }
           message="login successful "
           return responseClient({req,res,message,jwts})
