@@ -28,6 +28,13 @@ export const createRefreshJWT = async (email)=>{
     // find the user using email and update the value of refreshJWT
 
     const user = await updateUser({ email }, { refreshJWT })
-    console.log("updated user", user)
+    return user?._id? refreshJWT:null
+}
 
+
+export const getJwts = async(email)=>{
+    return {
+      accessJWT: await createAccessJWT(email),
+      refreshJWT: await createRefreshJWT(email)
+    }
 }
