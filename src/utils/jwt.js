@@ -19,7 +19,15 @@ const obj = {
     return newSession?._id?token:null
 }
 
-
+// decode Access
+export const decodeAccessJWT = (token) => {
+ try {
+    return jwt.verify(token, process.env.ACCESSJWT_SECRET)
+    
+ } catch (error) {
+    return error.message
+ }
+}
 // creating refreshJWT 
 export const createRefreshJWT = async (email)=>{
     const refreshJWT = jwt.sign({ email }, process.env.REFRESH_SECRET,{
