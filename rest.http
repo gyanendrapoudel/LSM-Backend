@@ -36,4 +36,4 @@ Content-Type: application/json
 
 ### get user details with accessJWT
 GET {{url}}/api/v1/user/profile
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImcxMUBnbWFpbC5jb20iLCJpYXQiOjE3MzgzODc5MzIsImV4cCI6MTczODM4ODgzMn0.QrgWw6neJ2DlYxR_YTivhJuwFSkCBj_ZL5nhsHbpyo8
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImcxMUBnbWFpbC5jb20iLCJpYXQiOjE3Mzg1NDQzNTUsImV4cCI6MTczODU0NTI1NX0.AbAbCi-dqf5ELcH4inyRg1KVUMQKADkQ-kfEXBoPulk
