@@ -38,7 +38,14 @@ export const createRefreshJWT = async (email)=>{
     const user = await updateUser({ email }, { refreshJWT })
     return user?._id? refreshJWT:null
 }
-
+// decoding refresh
+export const decodeRefreshJWT = (token)=>{
+ try {
+    return jwt.verify(token, process.env.REFRESH_SECRET)
+ } catch (error) {
+    return error.message
+ }
+}
 
 export const getJwts = async(email)=>{
     return {

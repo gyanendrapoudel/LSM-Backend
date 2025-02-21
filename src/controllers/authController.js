@@ -1,4 +1,4 @@
-import { createUser, getUserByEmail, updateUserStatus } from '../models/user/UserModel.js'
+import { createUser, getOneUser, getUserByEmail, updateUserStatus } from '../models/user/UserModel.js'
 import { comparedPassword, hashPassword } from "../utils/bcrypt.js"
 import {responseClient} from "../middleware/responseClient.js"
 import { createSession, deleteSession } from '../models/session/SessionModel.js'
@@ -8,7 +8,7 @@ import {
   userActivateEmail,
 } from '../services/email/emailService.js'
 
-import { getJwts } from '../utils/jwt.js'
+import { createAccessJWT, decodeRefreshJWT, getJwts } from '../utils/jwt.js'
 export const insertNewUser = async(req,res,next)=>{
     try {
     const{password} = req.body
@@ -106,4 +106,36 @@ export const loginUser = async(req,res,next)=>{
   } catch (error) {
     next(error)
   }
+}
+
+export const renewAccessToken = async (req,res,next)=>{
+ const {authorization} = req.headers
+ const token = authorization.split(" ")[1]
+ if(token){
+  // decode 
+  const result = decodeRefreshJWT(token)
+  if(result?.email){
+
+    // use email and refresh JWT to find user
+    const user = await getOneUser({refreshJWT:token, email:result?.email})
+    
+    // create accessJWT using user email if user exist
+    if(user?._id){
+      const accessJWT = await createAccessJWT(user?.email)
+      console.log(accessJWT)
+      return responseClient({
+        req,
+        res,
+        message:"new access token from refresh token",
+        jwts:accessJWT
+      })
+    }
+
+  }
+ }
+
+ responseClient({
+  req,res,message:"", statusCode:"401"
+ })
+  
 }

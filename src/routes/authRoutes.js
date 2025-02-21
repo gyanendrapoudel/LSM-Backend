@@ -4,6 +4,7 @@ import {
   insertNewUser,
   activeNewUser,
   loginUser,
+  renewAccessToken,
 } from '../controllers/authController.js'
 import {
   newUserDataValidation,
@@ -23,5 +24,7 @@ router.post('/activate-user', activationDataValidation, activeNewUser)
 // login user
 router.post('/login', loginDataValidation, loginUser)
 
+// renew JWT
+router.get('/renew-jwt',renewAccessToken )
 export default router
 

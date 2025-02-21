@@ -7,6 +7,8 @@ export const getUserProfile = async (req,res,next)=>{
     const user = req.userInfo
     user.password = undefined
     user.__v = undefined
+  
+    
 
  return responseClient({
    req,

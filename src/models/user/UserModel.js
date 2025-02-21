@@ -22,3 +22,6 @@ export const updateUser = (filter,update)=>{
     filter,update,{new:true}
   )
 }
+export const getOneUser = (filter)=>{
+return userSchema.findOne(filter)
+}

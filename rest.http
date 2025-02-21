@@ -37,3 +37,7 @@ Content-Type: application/json
 ### get user details with accessJWT
 GET {{url}}/api/v1/user/profile
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImcxMUBnbWFpbC5jb20iLCJpYXQiOjE3Mzg1NDQzNTUsImV4cCI6MTczODU0NTI1NX0.AbAbCi-dqf5ELcH4inyRg1KVUMQKADkQ-kfEXBoPulk
+
+### get user detail with refreshJWT
+GET {{url}}/api/v1/auth/renew-jwt
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImcxMUBnbWFpbC5jb20iLCJpYXQiOjE3NDAwOTQ1OTksImV4cCI6MTc0MjY4NjU5OX0.MfgGehOMxUJm_RUt-k78grI5_3JpcFZAT6xRdDSaAK4

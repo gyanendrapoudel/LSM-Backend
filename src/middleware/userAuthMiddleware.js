@@ -12,6 +12,7 @@ export const userAuthMiddleware = async(req,res,next)=>{
   // active response user details
   // get token from headers
     const { authorization } = req.headers
+    console.log(authorization)
     const token = authorization.split(' ')[1]
      let message = 'Invalid login'
   if(token){
@@ -29,8 +30,9 @@ export const userAuthMiddleware = async(req,res,next)=>{
         if(user._id && user.status==='active'){
          
          req.userInfo = user
-         console.log(user)
-          next()
+     
+          return next()
+       
         }
         }
        
